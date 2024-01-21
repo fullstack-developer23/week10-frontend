@@ -1,25 +1,28 @@
+import React from 'react';
 import './App.css';
+import { useState } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import {Login} from './components/Login'
-import {SignUp} from './components/SignUp'
+import LogOrSign from './components/LogOrSign';
 
 function App() {
+  console.log(process.env.REACT_APP_URL)
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
     <div className="App">
       <header>
-      <Header />
+      <Header loggedIn={loggedIn} />
       </header>
 
       <section className='loginsignup-container'>
       
-      <SignUp />
-      <Login />
+      <LogOrSign setLoggedIn={setLoggedIn} />
 
       </section>
 
       <footer>
-        <Footer />
+        <Footer loggedIn={loggedIn} />
       </footer>
     </div>
   );

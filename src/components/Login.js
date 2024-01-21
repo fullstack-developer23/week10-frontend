@@ -1,15 +1,39 @@
 import React from "react";
 import "./Login.css";
-export const Login = () => {
+import { useState } from "react";
+import { loginFetch } from "../utils/fetch";
+
+export const Login = ({setLoggedIn}) => {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = await loginFetch(email, password);
+        await setLoggedIn(data.user);
+    }
+
     return (
-        <div className="main-header-container">
-        
-        <div className="form-box">
+<div className="login-container">
 
+<div className="login-inner-container">
 
+<h3 className="login-title">Log In</h3>
 
-        </div>
+<div className="form-box">
 
-        </div>
-    )
+    <form onSubmit={(e) => handleSubmit(e)}>
+    <input className='login-input' placeholder='Email' value={email} onChange={(e) => setEmail(e.target.value)} />
+        <input className='login-input' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
+        <button type='submit' onClick={(e)=>handleSubmit(e)}>Log In</button>
+    </form>
+
+</div>
+
+</div>
+
+</div>
+
+)
 }
